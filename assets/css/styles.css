@@ -575,11 +575,11 @@ img {
 
 .qualification__data {
     display: grid;
-    grid-template-columns: 1fr max-content 1fr;
+    grid-template-columns: 280px max-content 280px;
     column-gap: 1.5rem;
+    justify-content: center;
     align-items: start;
 }
-
 /* Left side items */
 .qualification__data > div:first-child:not(:empty) {
     justify-self: end;
