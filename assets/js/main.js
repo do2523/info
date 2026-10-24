@@ -107,25 +107,6 @@ let swiperPortfolio = new Swiper('.portfolio__container', {
     },
 })
 
-/*==================== TESTIMONIAL ====================*/
-let swiperTestimonial = new Swiper('.testimonial__container', {
-    loop: true,
-    grabCursor: true,
-    spaceBetween: 48,
-
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-    },
-    breakpoints: {
-        568: {
-            slidesPerView: 2,
-        },
-    }
-})
-
-
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
 const sections = document.querySelectorAll('section[id]')
 
@@ -165,27 +146,29 @@ window.addEventListener('scroll', scrollTop)
 const themeButton = document.getElementById('theme-button')
 const darkTheme = 'dark-theme'
 const iconTheme = 'uil-sun'
+const lightIcon = 'uil-moon'
 
-// Previously selected topic (if user selected)
+// Dark mode is the default unless the user has selected a theme.
 const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon = localStorage.getItem('selected-icon')
 
 // We obtain the current theme that the interface has by validating the dark-theme class
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun'
+const getCurrentIcon = () => document.body.classList.contains(darkTheme) ? iconTheme : lightIcon
 
-// We validate if the user previously chose a topic
+// Restore the user's saved theme, while defaulting to dark mode.
 if (selectedTheme) {
-  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
   document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-  themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
+  themeButton.classList.toggle(iconTheme, selectedTheme === 'dark')
+  themeButton.classList.toggle(lightIcon, selectedTheme !== 'dark')
 }
 
 // Activate / deactivate the theme manually with the button
 themeButton.addEventListener('click', () => {
     // Add or remove the dark / icon theme
     document.body.classList.toggle(darkTheme)
-    themeButton.classList.toggle(iconTheme)
+    const isDark = document.body.classList.contains(darkTheme)
+    themeButton.classList.toggle(iconTheme, isDark)
+    themeButton.classList.toggle(lightIcon, !isDark)
     // We save the theme and the current icon that the user chose
     localStorage.setItem('selected-theme', getCurrentTheme())
     localStorage.setItem('selected-icon', getCurrentIcon())

@@ -290,17 +290,23 @@ img{
             width: 170px;
         }
     }
+    &__img{
+        grid-column: 1/3;
+        justify-self: center;
+    }
     &__data{
         grid-column: 1/3;
     }
     &__title{
         font-size: var(--big-font-size);
+        text-align: center;
     }
     &__subtitle{
         font-size: var(--h3-font-size);
         color: var(--text-color);
         font-weight: var(--font-medium);
         margin-bottom: var(--mb-0-75);
+        text-align: center;
     }
     &__description{
         margin-bottom: var(--mb-2);
@@ -380,7 +386,7 @@ img{
 /*==================== ABOUT ====================*/
 .about{
     &__img{
-        width: 200px;
+        width: 312.5px;
         border-radius: .5rem;
         justify-self: center;
         align-self: center;
@@ -388,25 +394,8 @@ img{
     &__description{
         text-align: center;
         margin-bottom: var(--mb-2-5);
-    }
-    &__info{
-        display: flex;
-        justify-content: space-evenly;
-        margin-bottom: var(--mb-2-5);
-
-        &-title{
-            font-size: var(--h2-font-size);
-            font-weight: var(--font-semi-bold);
-            color: var(--title-color);
-        }
-        &-name{
-            font-size: var(--smaller-font-size);
-        }
-        &-title,
-        &-name{
-            display: block;
-            text-align: center;
-        }
+        font-size: 1.1875rem;
+        line-height: 1.6;
     }
     &__buttons{
         display: flex;
@@ -422,7 +411,7 @@ img{
     &__header{
         display: flex;
         align-items: center;
-        margin-bottom: var(--mb-2-5);
+        margin-bottom: .75rem;
         cursor: pointer;
     }
     &__icon,
@@ -445,7 +434,7 @@ img{
         transition: .4s;
     }
     &__list{
-        row-gap: 1.5rem;
+        row-gap: .375rem;
         padding-left: 2.7rem;
     }
     &__titles{
@@ -454,8 +443,13 @@ img{
         margin-bottom: var(--mb-0-5);
     }
     &__name{
-        font-size: var(--normal-font-size);
+        font-size: 1.1rem;
         font-weight: var(--font-medium);
+
+        &::before{
+            content: "•";
+            margin-right: .5rem;
+        }
     }
     &__bar,
     &__percentage{
@@ -681,10 +675,17 @@ img{
     &__content{
         padding: 0 1.5rem;
     }
-    &__img{
+    &__img-frame{
         width: 265px;
+        height: 265px;
         border-radius: .5rem;
         justify-self: center;
+        overflow: hidden;
+    }
+    &__img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
     &__title{
         font-size: var(--h3-font-size);
@@ -707,6 +708,7 @@ img{
     font-size: 2rem;
     color: var(--first-color);
 }
+
 .swiper-button-prev{
     left: -.5rem;
     
@@ -738,6 +740,7 @@ img{
     &__title{
         font-size: var(--h2-font-size);
         margin-bottom: var(--mb-0-75);
+        white-space: nowrap;
     }
     &__description{
         margin-bottom: var(--mb-1-5);
@@ -786,6 +789,53 @@ img{
 }
 .swiper-container .swiper-pagination-testimonial{
     bottom: 0;
+}
+
+/*==================== HOBBIES ====================*/
+.hobbies{
+    &__intro{
+        max-width: 650px;
+        margin: 0 auto var(--mb-2-5);
+        text-align: center;
+    }
+    &__container{
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+    overflow-anchor: none;
+    &__card{
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        overflow: hidden;
+        background-color: var(--container-color);
+        border: 1px solid var(--scroll-bar-color);
+        border-radius: .75rem;
+        transition: transform .3s, box-shadow .3s;
+
+        &:hover{
+            transform: translateY(-.35rem);
+            box-shadow: 0 8px 20px var(--scroll-bar-color);
+        }
+    }
+    &__img{
+        display: block;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+    }
+    &__body{
+        flex: 1;
+        padding: 1.5rem;
+    }
+    &__title{
+        margin-bottom: var(--mb-0-75);
+        font-size: var(--h3-font-size);
+    }
+    &__description{
+        margin: 0;
+    }
 }
 
 /*==================== CONTACT ME ====================*/
@@ -860,7 +910,7 @@ img{
         }
     }
     &__social{
-        font-size: 1.25rem;
+        font-size: 1rem;
         margin-right: var(--mb-1-5);
         &:hover{
             color: var(--first-color-lighter);
@@ -924,6 +974,25 @@ img{
 }
 
 /*==================== MEDIA QUERIES ====================*/
+@media screen and(max-width: 767px){
+    .hobbies__container{
+        grid-template-columns: 1fr;
+    }
+    .about__img{
+        margin-top: 0;
+    }
+}
+
+@media screen and(max-width: 567px){
+    .home__social{
+        grid-column: 1/3;
+        grid-template-columns: repeat(2, max-content);
+        justify-content: center;
+        column-gap: 1.25rem;
+        row-gap: 0;
+    }
+}
+
 /* For small devices */
 @media screen and(max-width: 350px){
     .container{
@@ -993,6 +1062,10 @@ img{
 
 /* For medium devices */
 @media screen and(min-width: 568px){
+    .hobbies__container{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .home{
         &__content{
             grid-template-columns: max-content 1fr 1fr;
@@ -1099,13 +1172,11 @@ img{
             column-gap: 5rem;
         }
         &__img{
-            width: 350px;
+            width: 125%;
         }
         &__description{
             text-align: initial;
-        }
-        &__info{
-            justify-content: space-between;
+            font-size: 1.25rem;
         }
         &__buttons{
             justify-content: initial;
@@ -1141,8 +1212,9 @@ img{
     }
 
     .portfolio{
-        &__img{
+        &__img-frame{
             width: 320px;
+            height: 320px;
         }
         &__content{
             align-items: center;
@@ -1158,6 +1230,7 @@ img{
         &__container{
             background-color: var(--first-color-second);
             border-radius: 1rem;
+            width: 12.5%;
             padding: 3rem 2.5rem 0;
             grid-template-columns: 1fr max-content;
             column-gap: 3rem;
