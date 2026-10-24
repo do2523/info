@@ -103,6 +103,7 @@ body.dark-theme{
 
 html{
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body{
@@ -111,6 +112,7 @@ body{
     font-size: var(--normal-font-size);
     background-color: var(--body-color);
     color: var(--text-color);
+    overflow-x: hidden;
 }
 h1,h2,h3,h4{
     color: var(--title-color);
@@ -534,19 +536,30 @@ img{
         display: grid;
         grid-template-columns: 1fr max-content 1fr;
         column-gap: 1.5rem;
+
+        > div{
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
     }
     &__title{
         font-size: var(--normal-font-size);
         font-weight: var(--font-medium);
+        max-width: 100%;
+        overflow-wrap: anywhere;
     }
     &__subtitle{
         display: inline-block;
         font-size: var(--small-font-size);
         margin-bottom: var(--mb-1);
+        max-width: 100%;
+        overflow-wrap: anywhere;
     }
     &__calendar{
         font-size: var(--smaller-font-size);
         color: var(--text-color-light);
+        max-width: 100%;
+        overflow-wrap: anywhere;
     }
     &__rounder{
         display: inline-block;
@@ -904,9 +917,8 @@ img{
         z-index: 0;
         top: 0;
         bottom: 0;
-        left: 50%;
-        width: 100vw;
-        transform: translateX(-50%);
+        left: 0;
+        right: 0;
         background-color: var(--first-color-second);
     }
 
@@ -1006,12 +1018,9 @@ img{
 }
 
 @media screen and(max-width: 567px){
-    body{
-        overflow-x: hidden;
-    }
     .footer{
-        width: 100vw;
-        margin-left: calc(50% - 50vw);
+        width: 100%;
+        margin-left: 0;
     }
     .home__img img{
         transform: none;

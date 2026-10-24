@@ -98,6 +98,7 @@ body.dark-theme {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -106,6 +107,7 @@ body {
   font-size: var(--normal-font-size);
   background-color: var(--body-color);
   color: var(--text-color);
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
@@ -621,6 +623,16 @@ img {
     justify-self: start;
     text-align: left;
 }
+.qualification__data > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+.qualification__title,
+.qualification__subtitle,
+.qualification__calendar {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
 .qualification__data:last-child .qualification__line {
     display: none;
 }
@@ -1000,9 +1012,8 @@ img {
   z-index: 0;
   top: 0;
   bottom: 0;
-  left: 50%;
-  width: 100vw;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   background-color: var(--first-color-second);
 }
 
@@ -1104,12 +1115,9 @@ img {
 }
 
 @media screen and (max-width: 567px) {
-  body {
-    overflow-x: hidden;
-  }
   .footer {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
+    width: 100%;
+    margin-left: 0;
   }
   .home__img img {
     transform: none;
